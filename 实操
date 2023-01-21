@@ -1,3 +1,38 @@
 通过水龙头领取测试币：
 1、访问https://goerli-faucet.pk910.de/
 2、填写钱包的地址，进行挖矿
+
+编写自己的第一个收钱HelloWord
+代码：
+// SPDX-License-Identifier: GPL-3.0 
+
+pragma solidity >=0.7.0 <0.9.0;
+
+/**
+ * @title Firire
+ * @custom:dev-run-script ./scripts/deploy_with_ethers.ts
+ */
+contract Firire {
+    
+    function withdrawal(uint256 amount) public {
+        require(amount <= 100000000000000000, "error");
+        payable(msg.sender).transfer(amount);
+    }
+
+    fallback() external payable {}
+
+    receive() external payable {}
+}
+
+描述：
+第 1 行是指定版本许可。
+第 3 行是指定使用的语言版本。
+第 9 行是声明一个名为 Firire 的合约。
+withdrawal 方法是用来从合约中提币到MATAMASK中的
+receive() 是一个特殊的函数，一个合约可以包含最多一个 receive 函数。
+我们给合约转账时，会去执行 receive 函数，如果转账时 receive 函数不存在，会去调用 fallback 函数。如果 fallback 函数也不存在，那么合约不可以通过正常转账来接受 ether。
+目前在0.8.17版本中这两个方法都必须要写
+
+开发工具：remix 
+钱包：METAMASK
+
