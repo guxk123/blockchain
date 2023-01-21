@@ -1,0 +1,12 @@
+1、合约
+contract MyContract {
+  
+}
+contract 代表一个合约，可以使用new MyContract();创建一个合约
+继承，使用is关键字来继承
+contract MyContract2 is MyContract1 {
+  
+}
+可以通过address隐式转换父合约
+MyContract2 c = new MyContract2();
+address addr = address(c);
